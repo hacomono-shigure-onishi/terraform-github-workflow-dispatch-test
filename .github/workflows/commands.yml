@@ -30,4 +30,4 @@ jobs:
       - name: Terraform run
         id: run
         working-directory: terraform/environments/${{ github.event.inputs.environment }}
-        run: terraform ${{ github.event.inputs.command }}
+        run: terraform ${{ github.event.inputs.main_command }}

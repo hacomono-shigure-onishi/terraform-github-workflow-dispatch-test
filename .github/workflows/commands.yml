@@ -5,6 +5,7 @@ on:
     inputs:
       main_command:
         description: 'Select terraform main comamnd'
+        type: choice
         required: true
         options:
         - show

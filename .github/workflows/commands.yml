@@ -1,0 +1,33 @@
+name: Terraform Commands
+
+on:
+  workflow_dispatch:
+    inputs:
+      main_command:
+        description: 'Select terraform main comamnd'
+        required: true
+        options:
+        - show
+        - plan
+        - apply --auto-approve
+      environment:
+        description: 'Select terraform environment dir'
+        required: true
+        type: environment
+
+jobs:
+  command_run:
+    name: Terraform command run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.4
+
+      - name: Terraform run
+        id: run
+        working-directory: terraform/environments/${{ github.event.inputs.environment }}
+        run: terraform ${{ github.event.inputs.command }}
